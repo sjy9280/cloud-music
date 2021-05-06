@@ -1,0 +1,135 @@
+{
+  "id": "2529523",
+  "name": "no name",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "688141",
+      "name": "展开 全屏 扩展",
+      "font_class": "zhankaiquanpingkuozhan",
+      "unicode": "e7b0",
+      "unicode_decimal": 59312
+    },
+    {
+      "icon_id": "2154211",
+      "name": "追番数_32",
+      "font_class": "zhuifanshu",
+      "unicode": "e665",
+      "unicode_decimal": 58981
+    },
+    {
+      "icon_id": "2154280",
+      "name": "随机播放_32",
+      "font_class": "suijibofang",
+      "unicode": "e66b",
+      "unicode_decimal": 58987
+    },
+    {
+      "icon_id": "2154282",
+      "name": "循环播放_32",
+      "font_class": "xunhuanbofang",
+      "unicode": "e66c",
+      "unicode_decimal": 58988
+    },
+    {
+      "icon_id": "2154283",
+      "name": "单曲循环_32",
+      "font_class": "danquxunhuan",
+      "unicode": "e66d",
+      "unicode_decimal": 58989
+    },
+    {
+      "icon_id": "2154753",
+      "name": "管理视频_44",
+      "font_class": "guanlishipin",
+      "unicode": "e683",
+      "unicode_decimal": 59011
+    },
+    {
+      "icon_id": "2511135",
+      "name": "已追番",
+      "font_class": "yizhuifan",
+      "unicode": "e6db",
+      "unicode_decimal": 59099
+    },
+    {
+      "icon_id": "1150634",
+      "name": "静音",
+      "font_class": "jingyin",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "1150643",
+      "name": "扬声器",
+      "font_class": "yangshengqi",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "994692",
+      "name": "开始",
+      "font_class": "ai04",
+      "unicode": "e676",
+      "unicode_decimal": 58998
+    },
+    {
+      "icon_id": "994764",
+      "name": "暂停",
+      "font_class": "ai06",
+      "unicode": "e677",
+      "unicode_decimal": 58999
+    },
+    {
+      "icon_id": "996525",
+      "name": "下一个",
+      "font_class": "ai09",
+      "unicode": "e67d",
+      "unicode_decimal": 59005
+    },
+    {
+      "icon_id": "996526",
+      "name": "上一个",
+      "font_class": "ai10",
+      "unicode": "e67e",
+      "unicode_decimal": 59006
+    },
+    {
+      "icon_id": "12708826",
+      "name": "音乐",
+      "font_class": "yinle",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "12720543",
+      "name": "一键听",
+      "font_class": "yijianting",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "12750230",
+      "name": "视频内容",
+      "font_class": "shipinneirong",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "20406901",
+      "name": "专家库_团队",
+      "font_class": "zhuanjiaku_tuandui",
+      "unicode": "e79f",
+      "unicode_decimal": 59295
+    },
+    {
+      "icon_id": "1301391",
+      "name": "衣服",
+      "font_class": "yifu",
+      "unicode": "e666",
+      "unicode_decimal": 58982
+    }
+  ]
+}
