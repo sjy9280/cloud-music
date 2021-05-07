@@ -6,24 +6,46 @@
       <i class="el-icon-caret-right"></i>
     </div>
     <el-menu
-      default-active="2"
-      class="el-menu-vertical-demo">
-      <el-menu-item index="1">
+      default-active="/"
+      class="el-menu-vertical-demo"
+      router>
+      <el-menu-item index="/">
         <i class="iconfont icon-yinle icon-size"></i>
         <span slot="title">发现音乐</span>
       </el-menu-item>
-      <el-menu-item index="2">
+      <el-menu-item index="/private-fm">
         <i class="iconfont icon-yijianting icon-size"></i>
         <span slot="title">私人FM</span>
       </el-menu-item>
-      <el-menu-item index="3">
+      <el-menu-item index="/video">
         <i class="iconfont icon-shipinneirong icon-size"></i>
         <span slot="title">视频</span>
       </el-menu-item>
-      <el-menu-item index="4">
+      <el-menu-item index="/friends">
         <i class="iconfont icon-zhuanjiaku_tuandui icon-size"></i>
         <span slot="title">朋友</span>
       </el-menu-item>
+      <el-submenu index="5">
+        <template slot="title">
+          <span>创建的歌单</span>
+          <i class="el-icon-plus" style="margin-left: 20px"></i>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item index="5-1">我喜欢的音乐</el-menu-item>
+          <el-menu-item index="5-2">我喜欢的音乐</el-menu-item>
+          <el-menu-item index="5-3">我喜欢的音乐</el-menu-item>
+          <el-menu-item index="5-4">我喜欢的音乐</el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
+      <el-submenu index="6">
+        <template slot="title">
+          <span>收藏的歌单</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item index="6-1">我喜欢的音乐</el-menu-item>
+          <el-menu-item index="6-2">我喜欢的音乐</el-menu-item>
+        </el-menu-item-group>
+      </el-submenu>
     </el-menu>
   </div>
 </template>
@@ -41,9 +63,10 @@ ul, li {
   padding: 0;
 }
 
-.el-menu{
+.el-menu {
   background-color: #ededed;
   border: 0;
+
   .icon-size {
     font-size: 20px;
     margin-right: 10px;
@@ -58,7 +81,20 @@ ul, li {
   align-items: center;
 
   .login_username {
-    margin:0 10px;
+    margin: 0 10px;
   }
+}
+
+.el-submenu, .el-menu-item, .el-menu-item-group {
+  background-color: #ededed;
+}
+
+::v-deep .el-menu-item-group__title {
+  display: none;
+}
+
+::v-deep .el-submenu .el-menu-item {
+  height: 40px;
+  line-height: 40px;
 }
 </style>

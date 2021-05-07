@@ -1,15 +1,12 @@
 <template>
-<layout></layout>
+  <router-view></router-view>
 </template>
 
 <style lang="scss">
-body{
+body {
   margin: 0;
 }
 </style>
 <script>
-import Layout from '@/views/layout/index'
-export default {
-  components: { Layout }
-}
+export default {}
 </script>
