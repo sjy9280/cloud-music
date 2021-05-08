@@ -31,3 +31,28 @@ export const getRecommendMV = () => {
     url: '/personalized/mv'
   })
 }
+
+// 歌单页所有分类
+export const getSongListCategories = () => {
+  return request({
+    method: 'GET',
+    url: '/playlist/catlist'
+  })
+}
+
+// 歌单页热门分类
+export const getSongListHotCategories = () => {
+  return request({
+    method: 'GET',
+    url: '/playlist/hot'
+  })
+}
+
+// 所有歌单--网友精选碟
+export const getAllSongList = (params) => {
+  return request({
+    method: 'GET',
+    url: '/top/playlist',
+    params
+  })
+}

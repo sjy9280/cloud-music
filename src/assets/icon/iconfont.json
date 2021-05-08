@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "867298",
+      "name": "HOT",
+      "font_class": "hot",
+      "unicode": "e678",
+      "unicode_decimal": 59000
+    },
+    {
       "icon_id": "688141",
       "name": "展开 全屏 扩展",
       "font_class": "zhankaiquanpingkuozhan",

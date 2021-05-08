@@ -5,11 +5,14 @@
            @mouseleave="handleIconHide()">
         <el-image :src="imgUrl" :class="'el-image-'+shape"></el-image>
         <i class="el-icon-video-play left-top-icon" v-show="leftTopIcon"></i>
-        <span v-show="rightTopIcon" class="right-top-icon"><i class="el-icon-caret-right"></i>{{ counts }}</span>
+        <span v-show="rightTopIcon" class="right-top-icon"><i class="el-icon-caret-right"></i>{{
+            numFormat(counts)
+          }}</span>
+        <span v-show="leftBottomIcon" class="left-bottom-icon"><i class="el-icon-user"></i>&nbsp;{{ user }}</span>
         <i class="iconfont icon-ai04 right-bottom-icon" v-show="rightBottomIcon"></i>
       </div>
-      <span style="font-size: 12px">{{title}}</span>
-      <span style="display: block;font-size: 12px;color: gray">{{author}}</span>
+      <span style="font-size: 12px">{{ title }}</span>
+      <span style="display: block;font-size: 12px;color: gray">{{ author }}</span>
     </div>
   </div>
 </template>
@@ -20,6 +23,7 @@ export default {
   props: {
     title: String,
     author: String,
+    user: String,
     imgUrl: String,
     shape: {
       type: String,
@@ -36,7 +40,11 @@ export default {
       type: Boolean,
       default: false
     },
-    counts: String
+    leftBottomIcon: {
+      type: Boolean,
+      default: false
+    },
+    counts: Number
   },
   data () {
     return {
@@ -49,6 +57,17 @@ export default {
     },
     handleIconHide () {
       this.rightBottomIcon = false
+    }
+  },
+  computed: {
+    numFormat () {
+      return function (num) {
+        if (num > 100000) {
+          return Math.floor(num / 100000) + '万'
+        } else {
+          return num + ''
+        }
+      }
     }
   }
 }
@@ -106,6 +125,14 @@ export default {
     right: 5px;
     bottom: 5px;
     font-size: 50px;
+  }
+
+  .left-bottom-icon {
+    color: white;
+    position: absolute;
+    left: 5px;
+    bottom: 5px;
+    font-size: 10px;
   }
 }
 </style>

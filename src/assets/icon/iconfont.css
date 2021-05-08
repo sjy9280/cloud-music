@@ -1,10 +1,10 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2529523 */
-  src: url('iconfont.eot?t=1620325161382'); /* IE9 */
-  src: url('iconfont.eot?t=1620325161382#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('iconfont.woff?t=1620325161382') format('woff'),
-       url('iconfont.ttf?t=1620325161382') format('truetype'),
-       url('iconfont.svg?t=1620325161382#iconfont') format('svg');
+  src: url('iconfont.eot?t=1620457785243'); /* IE9 */
+  src: url('iconfont.eot?t=1620457785243#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('iconfont.woff?t=1620457785243') format('woff'),
+       url('iconfont.ttf?t=1620457785243') format('truetype'),
+       url('iconfont.svg?t=1620457785243#iconfont') format('svg');
 }
 
 .iconfont {
@@ -13,6 +13,10 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-hot:before {
+  content: "\e678";
 }
 
 .icon-zhankaiquanpingkuozhan:before {

@@ -16,7 +16,7 @@
       <block-title :title="'推荐歌单'"></block-title>
       <div class="content">
         <music-cover v-for="item in recommendSongsList" :key="item.id" :title="item.name"
-                     :img-url="item.picUrl" :counts="item.playCount | numFormat" :right-top-icon="true"
+                     :img-url="item.picUrl" :counts="item.playCount" :right-top-icon="true"
                      :shape="'square'"></music-cover>
       </div>
     </div>
@@ -27,7 +27,7 @@
       <div class="content">
         <music-cover v-for="item in recommendMv" :key="item.id" :title="item.name"
                      :author="item.artists[0].name"
-                     :img-url="item.picUrl" :counts="item.playCount | numFormat" :right-top-icon="true"></music-cover>
+                     :img-url="item.picUrl" :counts="item.playCount" :right-top-icon="true"></music-cover>
       </div>
     </div>
     <div class="news-radio-part"></div>
@@ -82,15 +82,6 @@ export default {
       const { data } = await getRecommendMV()
       if (data.code === 200) {
         this.recommendMv = data.result
-      }
-    }
-  },
-  filters: {
-    numFormat (num) {
-      if (num > 100000) {
-        return Math.floor(num / 100000) + '万'
-      } else {
-        return num + ''
       }
     }
   }
