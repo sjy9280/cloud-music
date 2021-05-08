@@ -7,8 +7,9 @@
     </div>
     <div class="category-content">
       <div v-for="item in categoryItems" :key="item.name" class="category-item">
-        {{ item.name }}
-        <img src="@/assets/img/hot.png" v-if="item.hot" class="category-hot">
+        <el-badge value="hot" class="item" :hidden="!item.hot">
+          <span style="padding-right: 4px">{{ item.name }}</span>
+        </el-badge>
       </div>
     </div>
   </div>
@@ -35,11 +36,11 @@ export default {
   .category-content {
     display: flex;
     flex-wrap: wrap;
-    flex: 4;
+    flex: 5;
 
     .category-item {
       position: relative;
-      width: 70px;
+      width: 72px;
       height: 35px;
       font-size: 12px;
       background-color: white;

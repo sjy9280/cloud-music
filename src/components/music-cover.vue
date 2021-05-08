@@ -9,7 +9,7 @@
             numFormat(counts)
           }}</span>
         <span v-show="leftBottomIcon" class="left-bottom-icon"><i class="el-icon-user"></i>&nbsp;{{ user }}</span>
-        <i class="iconfont icon-ai04 right-bottom-icon" v-show="rightBottomIcon"></i>
+        <i class="iconfont icon-ai04 right-bottom-icon" v-show="showIcon" v-if="rightBottomIcon"></i>
       </div>
       <span style="font-size: 12px">{{ title }}</span>
       <span style="display: block;font-size: 12px;color: gray">{{ author }}</span>
@@ -44,19 +44,23 @@ export default {
       type: Boolean,
       default: false
     },
+    rightBottomIcon: {
+      type: Boolean,
+      default: true
+    },
     counts: Number
   },
   data () {
     return {
-      rightBottomIcon: false
+      showIcon: false
     }
   },
   methods: {
     handleIconShow () {
-      this.rightBottomIcon = true
+      this.showIcon = true
     },
     handleIconHide () {
-      this.rightBottomIcon = false
+      this.showIcon = false
     }
   },
   computed: {

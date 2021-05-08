@@ -27,7 +27,7 @@ export const getRecommendSongsList = () => {
 // 推荐MV
 export const getRecommendMV = () => {
   return request({
-    method:'GET',
+    method: 'GET',
     url: '/personalized/mv'
   })
 }
@@ -53,6 +53,23 @@ export const getAllSongList = (params) => {
   return request({
     method: 'GET',
     url: '/top/playlist',
+    params
+  })
+}
+
+// 排行榜
+export const getRankList = () => {
+  return request({
+    method: 'GET',
+    url: '/toplist'
+  })
+}
+
+// 排行榜详情
+export const getRankListDetail = (params) => {
+  return request({
+    method: 'GET',
+    url: '/playlist/detail',
     params
   })
 }

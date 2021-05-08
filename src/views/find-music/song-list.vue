@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import MusicCover from '@/components/music—cover'
+import MusicCover from '@/components/music-cover'
 import { getAllSongList, getSongListCategories, getSongListHotCategories } from '@/services/find-music'
 import CategoryLayout from '@/views/find-music/component/category-layout'
 

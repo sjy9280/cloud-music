@@ -37,7 +37,7 @@
 <script>
 import { getBannerPics, getExclusiveMusic, getRecommendMV, getRecommendSongsList } from '@/services/find-music'
 import BlockTitle from '@/components/block-title'
-import MusicCover from '@/components/music—cover'
+import MusicCover from '@/components/music-cover'
 
 export default {
   name: 'MusicRecommend',
