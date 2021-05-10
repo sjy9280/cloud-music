@@ -53,16 +53,38 @@ const routes = [
         path: '/friends',
         name: 'friends',
         component: () => import(/* webpackChunkName: 'friends' */'@/views/friends/index')
+      },
+      {
+        path: '/playlist/detail/:id',
+        name: 'playListDetail',
+        component: () => import(/* webpackChunkName: 'play-list-detail' */'@/views/base/song-list-detail'),
+        children: [
+          {
+            path: 'songs',
+            name: 'songs',
+            component: () => import(/* webpackChunkName: 'play-list-detail-songs' */'@/views/base/component/songs')
+          },
+          {
+            path: 'comments',
+            name: 'comments',
+            component: () => import(/* webpackChunkName: 'play-list-detail-comments' */'@/views/base/component/comments')
+          },
+          {
+            path: 'collectors',
+            name: 'collectors',
+            component: () => import(/* webpackChunkName: 'play-list-detail-collectors' */'@/views/base/component/collectors')
+          }
+        ]
       }
     ]
   }
 ]
 
-const originalPush = VueRouter.prototype.push
-VueRouter.prototype.push = function push (location, onResolve, onReject) {
-  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
-  return originalPush.call(this, location).catch(err => err)
-}
+// const originalPush = VueRouter.prototype.push
+// VueRouter.prototype.push = function push (location, onResolve, onReject) {
+//   if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+//   return originalPush.call(this, location).catch(err => err)
+// }
 
 const router = new VueRouter({
   routes

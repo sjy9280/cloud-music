@@ -1,23 +1,24 @@
 <template>
   <div class="recommend_layout">
     <el-carousel :interval="4000" type="card" height="200px">
-      <el-carousel-item v-for="item in carousels" :key="item.targetId">
-        <el-image :src="item.imageUrl" style="border-radius: 10px;transform: scale(0.8)" fit="cover"></el-image>
+      <el-carousel-item v-for="item in carousels" :key="'carousel-info'+item.targetId+item.typeTitle">
+        <el-image :src="item.imageUrl" style="border-radius: 10px;transform: scale(0.8)" fit="cover"
+                  @click="handleBanner(item)"></el-image>
       </el-carousel-item>
     </el-carousel>
     <div class="exclusive-part">
       <block-title :title="'独家放送'"></block-title>
       <div class="content">
-        <music-cover v-for="item in exclusiveMusics" :key="item.id" :title="item.name"
+        <music-cover v-for="item in exclusiveMusics" :key="'cover-'+item.id" :title="item.name"
                      :img-url="item.sPicUrl" :left-top-icon="true"></music-cover>
       </div>
     </div>
     <div class="recommend-music-part">
       <block-title :title="'推荐歌单'"></block-title>
       <div class="content">
-        <music-cover v-for="item in recommendSongsList" :key="item.id" :title="item.name"
+        <music-cover v-for="item in recommendSongsList" :key="'recommend-song-info'+item.id" :title="item.name"
                      :img-url="item.picUrl" :counts="item.playCount" :right-top-icon="true"
-                     :shape="'square'"></music-cover>
+                     :shape="'square'" @click.native="handleSongDetail(item)"></music-cover>
       </div>
     </div>
     <div class="newest-music-part">
@@ -25,7 +26,7 @@
     <div class="recommend-mv-part">
       <block-title :title="'推荐MV'"></block-title>
       <div class="content">
-        <music-cover v-for="item in recommendMv" :key="item.id" :title="item.name"
+        <music-cover v-for="item in recommendMv" :key="'recommend-mv-info'+item.id" :title="item.name"
                      :author="item.artists[0].name"
                      :img-url="item.picUrl" :counts="item.playCount" :right-top-icon="true"></music-cover>
       </div>
@@ -62,6 +63,7 @@ export default {
   methods: {
     async getCarouselPic () {
       const { data } = await getBannerPics()
+      console.log(data)
       if (data.code === 200) {
         this.carousels = data.banners
       }
@@ -83,6 +85,14 @@ export default {
       if (data.code === 200) {
         this.recommendMv = data.result
       }
+    },
+    async handleBanner () {
+
+    },
+    handleSongDetail (item) {
+      this.$router.push({
+        path: `/playlist/detail/${item.id}/songs`
+      })
     }
   }
 }

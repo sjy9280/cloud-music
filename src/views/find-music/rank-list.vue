@@ -14,7 +14,8 @@
                      :shape="'square'" :right-top-icon="true"
                      :counts="item.playCount"
                      :title="item.name"
-                     :img-url="item.coverImgUrl"></music-cover>
+                     :img-url="item.coverImgUrl"
+                     @click.native="handleSongDetail(item)"></music-cover>
       </div>
     </div>
   </div>
@@ -52,6 +53,11 @@ export default {
           }
         }
       }
+    },
+    handleSongDetail (item) {
+      this.$router.push({
+        path: `/playlist/detail/${item.id}/songs`
+      })
     }
   }
 }

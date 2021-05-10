@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="rank-list-item">
-      <div class="rank-list-img" @mouseover="handleIconShow" @mouseleave="handleIconHide">
+      <div class="rank-list-img" @mouseover="handleIconShow" @mouseleave="handleIconHide" @click="handleSongDetail()">
         <el-image :src="imgUrl" class="item-img"></el-image>
         <span class="update-time">{{ updateTime | format }}更新</span>
         <i class="iconfont icon-ai04 center-icon" v-show="centerIcon"></i>
@@ -22,13 +22,13 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-button type="text" style="margin-left: 280px">查看更多>></el-button>
+    <el-button type="text" style="margin-left: 280px" @click="handleSongDetail()">查看更多>></el-button>
   </div>
 
 </template>
 
 <script>
-import { getRankListDetail } from '@/services/find-music'
+import { getPlayListDetail } from '@/services/find-music'
 
 export default {
   name: 'RankListItem',
@@ -48,7 +48,7 @@ export default {
   },
   methods: {
     async getRankListDetail () {
-      const { data } = await getRankListDetail({
+      const { data } = await getPlayListDetail({
         id: this.id
       })
       if (data.code === 200) {
@@ -62,6 +62,11 @@ export default {
     },
     handleIconHide () {
       this.centerIcon = false
+    },
+    handleSongDetail () {
+      this.$router.push({
+        path: `/playlist/detail/${this.id}/songs`
+      })
     }
   },
   filters: {

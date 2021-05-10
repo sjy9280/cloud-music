@@ -1,18 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import state from './state'
+import * as getters from './getters'
+import * as actions from './actions'
+import mutations from './mutations'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-    block_selected: window.localStorage.getItem('block_selected') || 0
-  },
-  mutations: {
-    setBlockSelected (state, payload) {
-      state.block_selected = payload
-      window.localStorage.setItem('block_selected', payload)
-    }
-  },
-  actions: {},
-  modules: {}
+  state,
+  getters,
+  mutations,
+  actions,
 })

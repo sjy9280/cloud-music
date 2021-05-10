@@ -26,7 +26,8 @@
                    :right-top-icon="true"
                    :counts="item.playCount"
                    :left-bottom-icon="true"
-                   :user="item.creator.nickname"></music-cover>
+                   :user="item.creator.nickname"
+                   @click.native="handleSongDetail(item)"></music-cover>
     </div>
     <el-pagination
       background
@@ -104,6 +105,11 @@ export default {
       if (data.code === 200) {
         this.hotCategories = data.tags
       }
+    },
+    handleSongDetail (item) {
+      this.$router.push({
+        path: `/playlist/detail/${item.id}/songs`
+      })
     }
   }
 }
@@ -116,11 +122,13 @@ export default {
     justify-content: space-between;
     align-items: center;
     margin: 10px 0;
-    .hot-category{
+
+    .hot-category {
       font-size: 14px;
       color: #303133;
       margin-right: 20px;
-      span{
+
+      span {
         margin: 0 10px;
         cursor: pointer;
       }

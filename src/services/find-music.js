@@ -57,6 +57,14 @@ export const getAllSongList = (params) => {
   })
 }
 
+// 主播电台banner
+export const getDjBanner = () => {
+  return request({
+    method: 'GET',
+    url: '/dj/banner'
+  })
+}
+
 // 排行榜
 export const getRankList = () => {
   return request({
@@ -65,8 +73,8 @@ export const getRankList = () => {
   })
 }
 
-// 排行榜详情
-export const getRankListDetail = (params) => {
+// 获取歌单详情
+export const getPlayListDetail = (params) => {
   return request({
     method: 'GET',
     url: '/playlist/detail',
