@@ -1,25 +1,24 @@
 <template>
   <div class="music-player">
-    <audio :src="playlist[currentIndex].url || ''" ref="audio"
-           @canplay="startPlay"></audio>
     <div class="music-left-msg">
-      <el-avatar shape="square" :size="40"
-                 src="https://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png"></el-avatar>
+      <el-avatar shape="square" :size="40" :src="currentMusic.pic"></el-avatar>
       <div class="music-msg-right">
         <div class="music-name">
           <div>
-            <span style="color: #303133">耳朵</span> -
-            <span>李荣浩</span>
+            <span style="color: #303133">{{ currentMusic.name }}&nbsp;-&nbsp;</span>
+            <span>{{ currentMusic.artist[0].name }}</span>
           </div>
-          <span class="music-duration">00:00 / 04:01</span>
+          <span class="music-duration">{{
+              currentTime | format
+            }} / {{ currentMusic.duration|timeFormat }}</span>
         </div>
-        <el-slider v-model="progress" :show-tooltip="false"></el-slider>
+        <el-slider v-model="musicProgress" :show-tooltip="false"  :step="0.01"></el-slider>
       </div>
     </div>
     <div class="music-player-control">
       <i class="iconfont icon-zhuifanshu" style="font-size: 20px;"></i>
       <i class="iconfont icon-ai10" style="font-size: 20px" @click="preMusic"></i>
-      <i class="iconfont" style="font-size: 45px" @click="toggleMusic" :class="playState?'icon-ai06':'icon-ai04'"></i>
+      <i class="iconfont" style="font-size: 45px" @click="toggleMusic" :class="playing?'icon-ai06':'icon-ai04'"></i>
       <i class=" iconfont icon-ai09" style="font-size: 20px" @click="nextMusic"></i>
     </div>
     <div class="music-setting">
@@ -53,58 +52,104 @@
 </template>
 
 <script>
-import { mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { format, silencePromise } from '@/utils/util'
+import { formatDate } from '@/utils/date'
+import musicPlayer from '@/components/music-player/player'
 
 export default {
   name: 'MusicPlayer',
   data () {
     return {
       playState: false,
-      progress: 50,
-      volume: 50
+      volume: 50,
+      currentProgress: 0,
+      lyric: [],
+      lyricIndex: 0,
+      isMute: false, // 是否静音
+      currentTime: 0,
+      flag: false,
+      musicProgress: 0
     }
   },
   created () {
+    this.audioEle.src = this.currentMusic.src
+  },
+  mounted () {
     this.$nextTick(() => {
-      this.setAudioEle(this.$refs.audio)
+      musicPlayer.initAudio(this)
     })
   },
   methods: {
     // 播放器的开关
     toggleMusic () {
-      this.playState = !this.playState
-      if (this.playState) {
-        this.audioEle.play()
-      } else {
-        this.audioEle.pause()
+      if (!this.flag) {
+        this.audioEle.autoplay = 'autoplay'
+        this.flag = true
       }
+      this.setPlaying(!this.playing)
     },
     // 上一首歌
     preMusic () {
-
+      let index = this.currentIndex
+      if (this.currentIndex - 1 < 0) {
+        index = this.playlist.length + (this.currentIndex - 1)
+      } else {
+        index = this.currentIndex - 1
+      }
+      this.setCurrentIndex({ index: index })
     },
 
     // 下一首歌
     nextMusic () {
+      let index = this.currentIndex
+      if (this.currentIndex + 1 > this.playlist.length - 1) {
+        index = 0
+      } else {
+        index = this.currentIndex + 1
+      }
+      this.setCurrentIndex({ index: index })
     },
     startPlay () {
 
     },
+    ...mapActions([
+      'setCurrentIndex',
+      'setPlaylist'
+    ]),
     ...mapMutations({
-      setAudioEle: 'SET_AUDIOELE'
+      setPlaying: 'SET_PLAYING'
     })
   },
   computed: {
     ...mapGetters([
       'audioEle',
-      'mode',
       'playing',
       'playlist',
-      'orderList',
       'currentIndex',
-      'currentMusic',
-      'historyList'
+      'currentMusic'
     ])
+  },
+  filters: {
+    timeFormat (time) {
+      return formatDate(new Date(time), 'mm:ss')
+    },
+    format
+  },
+  watch: {
+    currentMusic (newMusic, oldMusic) {
+      this.audioEle.src = this.playlist[this.currentIndex].src
+      this.currentTime = this.currentProgress = 0
+    },
+    playing (newPlaying) {
+      const audio = this.audioEle
+      this.$nextTick(() => {
+        newPlaying ? silencePromise(audio.play()) : audio.pause()
+      })
+    },
+    currentTime (newTime) {
+      this.musicProgress = Math.floor(this.currentTime * 1000 / this.currentMusic.duration * 100)
+    }
   }
 }
 </script>

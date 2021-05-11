@@ -19,7 +19,9 @@
 <script>
 import { getPlayListDetail } from '@/services/find-music'
 import { mapActions, mapMutations } from 'vuex'
+import { getCollectedSongs } from '@/services/song-list'
 import { getSong } from '@/services/player'
+import { Song } from '@/components/music-player/init-song'
 
 export default {
   name: 'SongListDetail',
@@ -27,6 +29,7 @@ export default {
     return {
       headerImg: '',
       tags: [],
+      songsList: [],
       creator: {},
       activeIndex: 1,
       prefix: '',
@@ -47,26 +50,34 @@ export default {
         this.headerImg = data.playlist.coverImgUrl
         this.commentCounts = data.playlist.commentCount
         this.trackIds = data.playlist.trackIds.map((item) => item.id)
+        const data1 = await getCollectedSongs({
+          ids: this.trackIds.join(',')
+        })
+        if (data1.data.code === 200) {
+          this.songsList = data1.data.songs
+        }
       }
     },
-    ...mapActions(['selectPlay']),
+    ...mapActions(['selectPlay', 'setPlaylist', 'setCurrentIndex']),
     ...mapMutations({
-      setPlaying: 'SET_PLAYING',
-      setPlaylist: 'SET_PLAYLIST',
-      setCurrentIndex: 'SET_CURRENTINDEX'
+      setPlaylist: 'SET_PLAYLIST'
     }),
     async playAllSongs () {
-      console.log('添加歌单')
-      const { data } = await getSong({
-        id: this.trackIds.join(',')
-      })
-      console.log(data)
-      if (data.code === 200) {
-        this.selectPlay({
-          list: data.data,
-          index: 0
+      const playList = []
+      for (let i = 0; i < this.songsList.length; i++) {
+        getSong({ id: this.songsList[i].id }).then(res => {
+          if (res.data.code === 200) {
+            const song = new Song(this.songsList[i], res.data.data[0].url, this.songsList[i].id)
+            playList.push(song)
+            if (i === this.songsList.length - 1) {
+              this.selectPlay({
+                list: playList,
+                index: 0
+              })
+              this.setCurrentIndex({ index: 0 })
+            }
+          }
         })
-        this.setCurrentIndex = 0
       }
     }
   }

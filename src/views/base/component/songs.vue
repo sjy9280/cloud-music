@@ -65,7 +65,6 @@ export default {
         })
         if (data1.data.code === 200) {
           this.songsList = data1.data.songs
-          console.log(this.songsList)
         }
       }
     }

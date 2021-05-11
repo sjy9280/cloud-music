@@ -21,29 +21,49 @@ const storage = {
   }
 }
 
-const HISTORY_LIST = '__music_historyList__'
-const LAST_SONG_LIST = '__music_song_list__'
-const CURRENT_INDEX = '__current_song_index__'
+const PLAY_SONG_LIST = '__music_song_list__'
+const CURRENT_INDEX = '__music_current_index__'
+const HISTORY_MUSIC_LIST = '__music_history_list__'
+const MODE_KEY = '__music_play_mode__'
+
 const HistoryListMAX = 200
 
 // 获取播放的歌单
-export function getLastSongList () {
-  return storage.get(LAST_SONG_LIST)
+export function getPlaySongList () {
+  return storage.get(PLAY_SONG_LIST)
 }
 
 // 设置当前播放歌单
-export function setLastSongList (list) {
-  storage.set(LAST_SONG_LIST, JSON.stringify(list))
+export function setPlaySongList (list) {
+  storage.set(PLAY_SONG_LIST, JSON.stringify(list))
 }
 
-// 获取播放历史
-export function getHistoryList () {
-  return storage.get(HISTORY_LIST)
+// // 更新当前播放列表
+// export function updatePlaySongList (musicList) {
+//   let list = getPlaySongList()
+//   let currentIndex = getCurrentMusicIndex()
+//   list.splice(currentIndex + 1, 0, musicList)
+//   setPlaySongList(list)
+// }
+
+// 获取当前音乐的index
+export function getCurrentMusicIndex () {
+  return storage.get(CURRENT_INDEX)
 }
 
-// 更新播放历史
+// 设置当前音乐的index
+export function setCurrentMusicIndex (index) {
+  storage.set(CURRENT_INDEX, index)
+}
+
+// // 获取播放历史
+export function getHistoryMusicList () {
+  return storage.get(HISTORY_MUSIC_LIST)
+}
+
+// // 更新播放历史
 export function setHistoryList (music) {
-  let list = storage.get(HISTORY_LIST)
+  let list = storage.get(HISTORY_MUSIC_LIST)
   const index = list.findIndex(item => {
     return item.id === music.id
   })
@@ -57,23 +77,21 @@ export function setHistoryList (music) {
   if (HistoryListMAX && list.length > HistoryListMAX) {
     list.pop()
   }
-  storage.set(HISTORY_LIST, JSON.stringify(list))
+  storage.set(HISTORY_MUSIC_LIST, JSON.stringify(list))
   return list
 }
 
-// 删除一条播放历史
+// // 删除一条播放历史
 export function removeHistoryList (music) {
-  storage.set(HISTORY_LIST, JSON.stringify(music))
+  storage.set(HISTORY_MUSIC_LIST, JSON.stringify(music))
   return music
 }
 
-// 清空播放历史
+// // 清空播放历史
 export function clearHistoryList () {
-  storage.clear(HISTORY_LIST)
+  storage.clear(HISTORY_MUSIC_LIST)
   return []
 }
-
-const MODE_KEY = '__music_play_mode__'
 
 // 获取播放模式
 export function getMode () {
@@ -85,17 +103,4 @@ export function setMode (mode) {
   storage.set(MODE_KEY, mode)
   return mode
 }
-
-// 设置索引
-export function setCurrentIndex (index) {
-  storage.set(CURRENT_INDEX, index)
-}
-
-// 获取索引
-export function getCurrentIndex () {
-  return storage.get(CURRENT_INDEX)
-}
-
-
-
 

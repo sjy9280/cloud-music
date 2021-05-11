@@ -77,7 +77,6 @@ export default {
       if (data.code === 200) {
         this.songListResult = data.playlists
         this.total = data.total
-        console.log(data)
       }
     },
     handlePageChange (page) {
@@ -86,7 +85,6 @@ export default {
     },
     async getAllCategories () {
       const { data } = await getSongListCategories()
-      console.log(data)
       if (data.code === 200) {
         for (const index in data.categories) {
           this.categories[index] = {}

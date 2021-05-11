@@ -1,6 +1,7 @@
 <template>
   <div class="app">
     <router-view></router-view>
+    <audio ref="audio"></audio>
   </div>
 </template>
 
@@ -11,5 +12,18 @@ body {
 </style>
 <script>
 
-export default {}
+import { mapMutations } from 'vuex'
+
+export default {
+  created () {
+    this.$nextTick(() => {
+      this.setAudioEle(this.$refs.audio)
+    })
+  },
+  methods: {
+    ...mapMutations({
+      setAudioEle: 'SET_AUDIOELE'
+    })
+  }
+}
 </script>

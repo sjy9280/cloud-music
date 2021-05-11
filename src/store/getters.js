@@ -6,13 +6,14 @@ export const mode = state => state.mode
 export const playing = state => state.playing
 // 播放列表
 export const playlist = state => state.playlist
-// 顺序列表
-export const orderList = state => state.orderList
-// 当前音乐索引
+// // 当前音乐索引
 export const currentIndex = state => state.currentIndex
 // 当前音乐
 export const currentMusic = state => {
+  if (state.playlist.length <= 0){
+    return {}
+  }
   return state.playlist[state.currentIndex] || {}
 }
 // 播放历史列表
-export const historyList = state => state.historyList
+export const historyList = state => state.historyMusicList
