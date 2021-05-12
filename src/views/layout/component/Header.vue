@@ -1,7 +1,8 @@
 <template>
   <div class="header">
     <div class="left">
-      <span v-for="item in headerMenu" :key="item.id" class="header-menu-item" @click="selectMenu(item)" :class="{active: isActive===item.id}">{{
+      <span v-for="item in headerMenu" :key="item.id" class="header-menu-item" @click="selectMenu(item)"
+            :class="{active: isActive===item.id}">{{
           item.title
         }}</span>
     </div>
@@ -25,7 +26,7 @@
 </template>
 
 <script>
-import store from '@/store'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'MusicHeader',
@@ -83,21 +84,27 @@ export default {
     }
   },
   created () {
-    this.initHeader()
   },
   methods: {
-    initHeader () {
-      if (store.state.block_selected === 0) {
+    selectMenu (item) {
+      this.$router.push({ name: item.name })
+      this.isActive = item.id
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'selectBlock'
+    ])
+  },
+  watch: {
+    selectBlock () {
+      if (this.selectBlock === 0) {
         this.headerMenu = this.headerList[0]
-      } else if (store.state.block_selected === 1) {
+      } else if (this.selectBlock === 1) {
         this.headerMenu = this.headerList[1]
       } else {
         this.headerMenu = []
       }
-    },
-    selectMenu (item) {
-      this.$router.push({ name: item.name })
-      this.isActive = item.id
     }
   }
 }

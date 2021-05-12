@@ -25,6 +25,7 @@ const PLAY_SONG_LIST = '__music_song_list__'
 const CURRENT_INDEX = '__music_current_index__'
 const HISTORY_MUSIC_LIST = '__music_history_list__'
 const MODE_KEY = '__music_play_mode__'
+const SELECTED_BLOCK = '__music_select_block__'
 
 const HistoryListMAX = 200
 
@@ -104,3 +105,12 @@ export function setMode (mode) {
   return mode
 }
 
+// 修改选中的模块
+export function setSelectedBlock (index) {
+  storage.set(SELECTED_BLOCK, index)
+}
+
+// 获取选中的模块
+export function getSelectBlock () {
+  return storage.get(SELECTED_BLOCK)
+}

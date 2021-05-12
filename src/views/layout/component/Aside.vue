@@ -8,7 +8,8 @@
     <el-menu
       default-active="/"
       class="el-menu-vertical-demo"
-      router>
+      router
+      @select="handleSelect">
       <el-menu-item index="/">
         <i class="iconfont icon-yinle icon-size"></i>
         <span slot="title">发现音乐</span>
@@ -51,8 +52,24 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
-  name: 'MusicAside'
+  name: 'MusicAside',
+  methods: {
+    handleSelect (key, keyPath) {
+      if (key === '/') {
+        this.setSelectBlock({ index: 0 })
+      } else if (key === '/video') {
+        this.setSelectBlock({ index: 1 })
+      } else {
+        this.setSelectBlock({ index: 2 })
+      }
+    },
+    ...mapActions([
+      'setSelectBlock'
+    ])
+  }
 }
 </script>
 

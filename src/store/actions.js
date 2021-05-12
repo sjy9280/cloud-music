@@ -5,7 +5,7 @@ import {
   setCurrentMusicIndex,
   setHistoryList,
   setMode,
-  setPlaySongList
+  setPlaySongList, setSelectedBlock
 } from '@/utils/storage'
 
 // 设置播放列表
@@ -55,6 +55,13 @@ export const clearPlayList = function ({ commit }) {
   commit(types.SET_CURRENTINDEX, -1)
   commit(types.SET_PLAYLIST, [])
   setPlaySongList([])
+}
+
+// 设置选中的模块
+export const setSelectBlock = function ({ commit }, { index }) {
+  console.log(index)
+  commit(types.SET_SELECT_BLOCK, index)
+  setSelectedBlock(index)
 }
 //
 // // 删除正在播放列表中的歌曲

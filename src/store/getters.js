@@ -17,3 +17,6 @@ export const currentMusic = state => {
 }
 // 播放历史列表
 export const historyList = state => state.historyMusicList
+
+// 当前选择的模块
+export const selectBlock = state => state.selectBlock

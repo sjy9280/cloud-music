@@ -55,9 +55,8 @@ export default {
   display: block;
   position: absolute;
   left: 0;
-  top: 0;
+  top: 60px;
   bottom: 60px;
-  z-index: 100;
 }
 
 .el-main {

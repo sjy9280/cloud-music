@@ -1,7 +1,7 @@
-import { getCurrentMusicIndex, getHistoryMusicList, getPlaySongList } from '@/utils/storage'
+import { getCurrentMusicIndex, getHistoryMusicList, getPlaySongList, getSelectBlock } from '@/utils/storage'
 
 const state = {
-  block_selected: window.localStorage.getItem('block_selected') || 0,
+  selectBlock: getSelectBlock() || 0,
   audioEle: null, // audio元素
   playing: false, // 播放状态
   playlist: getPlaySongList() || [], // 播放列表

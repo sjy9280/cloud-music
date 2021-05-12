@@ -25,29 +25,29 @@ const musicPlayer = {
       that.currentTime = ele.currentTime
     }
 
-    // // 当前音乐播放完毕
-    // ele.onended = () => {
-    //   if (that.mode === playMode.loop){
-    //     that.loop()
-    //   }else {
-    //     that.next
-    //   }
-    // }
+    // 当前音乐播放完毕
+    ele.onended = () => {
+      if (that.playMode === playMode.loop){
+        that.loop()
+      }else {
+        that.nextMusic()
+      }
+    }
 
-    // // 音乐播放错误
-    // ele.onerror = () => {
-    //   if (retry === 0){
-    //     let toastText = '当前音乐不可以播放，已自动播放下一曲'
-    //     if (that.playlist.length === 1){
-    //       toastText = '当前没有可播放的音乐'
-    //     }
-    //     that.next(true)
-    //   }else {
-    //     retry -= 1
-    //     ele.url = that.currentMusic.url
-    //     ele.load()
-    //   }
-    // }
+    // 音乐播放错误
+    ele.onerror = () => {
+      if (retry === 0) {
+        this.$message.error('当前音乐不可以播放，已自动播放下一曲')
+        if (that.playlist.length === 1) {
+          this.$message.error('当前没有可播放的音乐')
+        }
+        that.nextMusic()
+      } else {
+        retry -= 1
+        ele.url = that.currentMusic.url
+        ele.load()
+      }
+    }
 
     // 音乐进度拖动大于加载时重载音乐
     ele.onstalled = () => {
@@ -86,6 +86,5 @@ const musicPlayer = {
 
   }
 }
-
 
 export default musicPlayer

@@ -32,6 +32,10 @@ const mutations = {
   // 修改播放历史列表
   [types.SET_HISTORYLIST] (state, historyList) {
     state.historyMusicList = historyList
+  },
+  // 修改选中的模块
+  [types.SET_SELECT_BLOCK] (state,index){
+      state.selectBlock = index
   }
 }
 

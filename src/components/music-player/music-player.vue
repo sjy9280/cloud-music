@@ -1,7 +1,11 @@
 <template>
   <div class="music-player">
+    <!--歌曲信息-->
     <div class="music-left-msg">
-      <el-avatar shape="square" :size="40" :src="currentMusic.pic"></el-avatar>
+      <div class="play-cover" @mouseenter="isShade=true" @mouseleave="isShade=false" @click="togglePlayerPure">
+        <el-avatar shape="square" :size="40" :src="currentMusic.pic"></el-avatar>
+        <i class="iconfont icon-zhankaiquanpingkuozhan cover-kuozhan" v-show="isShade"></i>
+      </div>
       <div class="music-msg-right">
         <div class="music-name">
           <div>
@@ -12,15 +16,19 @@
               currentTime | format
             }} / {{ currentMusic.duration|timeFormat }}</span>
         </div>
-        <el-slider v-model="musicProgress" :show-tooltip="false"  :step="0.01"></el-slider>
+        <el-slider v-model="musicProgress" :show-tooltip="false" :step="0.01" @change="dragProgress"></el-slider>
       </div>
     </div>
+
+    <!--播放器按钮-->
     <div class="music-player-control">
       <i class="iconfont icon-zhuifanshu" style="font-size: 20px;"></i>
       <i class="iconfont icon-ai10" style="font-size: 20px" @click="preMusic"></i>
       <i class="iconfont" style="font-size: 45px" @click="toggleMusic" :class="playing?'icon-ai06':'icon-ai04'"></i>
       <i class=" iconfont icon-ai09" style="font-size: 20px" @click="nextMusic"></i>
     </div>
+
+    <!--音乐播放设置-->
     <div class="music-setting">
       <i class="iconfont icon-xunhuanbofang" style="font-size: 20px"></i>
       <el-popover
@@ -48,6 +56,12 @@
         </el-button>
       </el-popover>
     </div>
+
+    <!--歌词页面-->
+    <transition name="lyrics" enter-active-class="animate__animated animate__fadeInUpBig"
+                leave-active-class="animate__animated animate__fadeOutDownBig">
+      <lyrics-layout v-show="isLyrics" :current-music="currentMusic"></lyrics-layout>
+    </transition>
   </div>
 </template>
 
@@ -56,9 +70,11 @@ import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { format, silencePromise } from '@/utils/util'
 import { formatDate } from '@/utils/date'
 import musicPlayer from '@/components/music-player/player'
+import LyricsLayout from '@/components/music-player/lyrics'
 
 export default {
   name: 'MusicPlayer',
+  components: { LyricsLayout },
   data () {
     return {
       playState: false,
@@ -69,7 +85,10 @@ export default {
       isMute: false, // 是否静音
       currentTime: 0,
       flag: false,
-      musicProgress: 0
+      musicProgress: 0,
+      isLyrics: false, // 是否展开歌词
+      isShade: false,
+      oldSelectBlock: 2
     }
   },
   created () {
@@ -110,12 +129,29 @@ export default {
       }
       this.setCurrentIndex({ index: index })
     },
-    startPlay () {
-
+    loop () {
+      this.audioEle.currentTime = 0
+      silencePromise(this.audioEle.play())
+      this.setPlaying(true)
+    },
+    dragProgress () {
+      this.audioEle.currentTime = this.currentMusic.duration * this.musicProgress / 100000
+    },
+    togglePlayerPure () {
+      this.isLyrics = !this.isLyrics
+      if (this.isLyrics) {
+        this.oldSelectBlock = this.selectBlock
+        this.setSelectBlock({ index: 2 })
+      } else {
+        if (this.oldSelectBlock !== 2) {
+          this.setSelectBlock({ index: this.oldSelectBlock })
+        }
+      }
     },
     ...mapActions([
       'setCurrentIndex',
-      'setPlaylist'
+      'setPlaylist',
+      'setSelectBlock'
     ]),
     ...mapMutations({
       setPlaying: 'SET_PLAYING'
@@ -127,7 +163,8 @@ export default {
       'playing',
       'playlist',
       'currentIndex',
-      'currentMusic'
+      'currentMusic',
+      'selectBlock'
     ])
   },
   filters: {
@@ -155,6 +192,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .music-player {
   height: 100%;
   display: flex;
@@ -167,6 +205,20 @@ export default {
     flex: 1;
     justify-content: flex-start;
     align-items: center;
+
+    .play-cover {
+      position: relative;
+      cursor: pointer;
+
+      .cover-kuozhan {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-top: -10px;
+        margin-left: -10px;
+        font-size: 20px;
+      }
+    }
 
     .music-msg-right {
       width: 400px;
@@ -214,5 +266,6 @@ export default {
       min-width: 40px;
     }
   }
+
 }
 </style>
