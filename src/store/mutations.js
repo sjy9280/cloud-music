@@ -34,8 +34,12 @@ const mutations = {
     state.historyMusicList = historyList
   },
   // 修改选中的模块
-  [types.SET_SELECT_BLOCK] (state,index){
-      state.selectBlock = index
+  [types.SET_SELECT_BLOCK] (state, index) {
+    state.selectBlock = index
+  },
+  // 修改当前时间
+  [types.SET_CURRENT_TIME] (state, time) {
+    state.currentTime = time
   }
 }
 

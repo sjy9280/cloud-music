@@ -28,13 +28,13 @@
         v-model="commentContent">
       </el-input>
 
-<!--      <div class="hot-comments">-->
-<!--        <ul>-->
-<!--          <li v-for="item in hotComments" :key="item.commentId">-->
-<!--            <comment-layout :comment="item"></comment-layout>-->
-<!--          </li>-->
-<!--        </ul>-->
-<!--      </div>-->
+      <!--      <div class="hot-comments">-->
+      <!--        <ul>-->
+      <!--          <li v-for="item in hotComments" :key="item.commentId">-->
+      <!--            <comment-layout :comment="item"></comment-layout>-->
+      <!--          </li>-->
+      <!--        </ul>-->
+      <!--      </div>-->
 
       <div class="comments">
         <ul>
@@ -100,7 +100,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'playing'
+      'playing',
+      'audioEle'
     ]),
     barStyle () {
       return {

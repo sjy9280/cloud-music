@@ -4,16 +4,16 @@
       <el-avatar :size="40" :src="comment.user.avatarUrl"></el-avatar>
     </div>
     <div class="comment-content">
-      <span class="nickname">{{comment.user.nickname}}：</span>
+      <span class="nickname">{{ comment.user.nickname }}：</span>
       <span>{{ comment.content }}</span>
       <div v-if="comment.beReplied.length !== 0" class="comment-replied">
-        <span class="nickname">{{comment.beReplied[0].user.nickname}}：</span>
+        <span class="nickname">{{ comment.beReplied[0].user.nickname }}：</span>
         {{ comment.beReplied[0].content }}
       </div>
       <div class="comment-event">
-        <p>{{ comment.time| format }}</p>
+        <p style="color: gray">{{ comment.time| format }}</p>
         <div class="comment-options">
-          <i class="iconfont icon-dianzan"></i>
+          <i class="iconfont icon-dianzan">&nbsp;<span style="font-size: 14px">{{ comment.likedCount === 0 ? '' : comment.likedCount }}</span></i>
           <i class="iconfont icon-fenxiang"></i>
           <i class="iconfont icon-pinglun"></i>
         </div>
@@ -52,7 +52,7 @@ export default {
   .comment-content {
     flex: 1;
 
-    .nickname{
+    .nickname {
       color: #557ead;
     }
 

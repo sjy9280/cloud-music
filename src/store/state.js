@@ -7,7 +7,8 @@ const state = {
   playlist: getPlaySongList() || [], // 播放列表
   currentIndex: getCurrentMusicIndex(), // 当前音乐索引
   historyMusicList: getHistoryMusicList || [],
-  playMode: 0
+  playMode: 0,
+  currentTime: 0 // 记录当前播放时间
 
 }
 

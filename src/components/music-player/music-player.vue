@@ -154,7 +154,8 @@ export default {
       'setSelectBlock'
     ]),
     ...mapMutations({
-      setPlaying: 'SET_PLAYING'
+      setPlaying: 'SET_PLAYING',
+      setCurrentTime: 'SET_CURRENT_TIME'
     })
   },
   computed: {
@@ -177,6 +178,7 @@ export default {
     currentMusic (newMusic, oldMusic) {
       this.audioEle.src = this.playlist[this.currentIndex].src
       this.currentTime = this.currentProgress = 0
+      this.setCurrentTime(this.currentTime)
     },
     playing (newPlaying) {
       const audio = this.audioEle
@@ -186,6 +188,7 @@ export default {
     },
     currentTime (newTime) {
       this.musicProgress = Math.floor(this.currentTime * 1000 / this.currentMusic.duration * 100)
+      this.setCurrentTime(this.currentTime)
     }
   }
 }
