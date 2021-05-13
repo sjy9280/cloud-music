@@ -18,10 +18,28 @@
       </div>
     </div>
     <div class="lyrics-down-block">
+      <span style="font-size: 18px;font-weight: bold">听友评论&nbsp;&nbsp;</span>
+      <span style="color: #303133">&nbsp;&nbsp;(已有{{ commentCount }}条评论)</span>
+      <el-input
+        class="edit-comment"
+        type="text"
+        prefix-icon="el-icon-edit"
+        placeholder="发表评论"
+        v-model="commentContent">
+      </el-input>
+
+<!--      <div class="hot-comments">-->
+<!--        <ul>-->
+<!--          <li v-for="item in hotComments" :key="item.commentId">-->
+<!--            <comment-layout :comment="item"></comment-layout>-->
+<!--          </li>-->
+<!--        </ul>-->
+<!--      </div>-->
+
       <div class="comments">
         <ul>
           <li v-for="item in comments" :key="item.commentId">
-            {{ item.content }}
+            <comment-layout :comment="item"></comment-layout>
           </li>
         </ul>
       </div>
@@ -33,17 +51,24 @@
 import { getLyric, getSongComments } from '@/services/player'
 import LyricPlayer from '@/components/music-player/lyric-player'
 import { mapGetters } from 'vuex'
+import CommentLayout from '@/components/comment-layout'
 
 export default {
   name: 'LyricsLayout',
-  components: { LyricPlayer },
+  components: {
+    CommentLayout,
+    LyricPlayer
+  },
   props: {
     currentMusic: Object
   },
   data () {
     return {
       lyric: '',
-      comments: []
+      comments: [],
+      commentContent: '',
+      commentCount: 0,
+      hotComments: []
     }
   },
   created () {
@@ -68,6 +93,8 @@ export default {
       })
       if (data.code === 200) {
         this.comments = data.comments
+        this.commentCount = data.total
+        this.hotComments = data.hotComments
       }
     }
   },
@@ -82,9 +109,9 @@ export default {
     }
   },
   watch: {
-    id (newId) {
-      console.log(newId)
+    currentMusic (newMusic) {
       this.getLyrics()
+      this.getComments()
     }
   }
 }
@@ -115,9 +142,8 @@ export default {
         position: absolute;
         width: 25px;
         height: 25px;
-        left: 60%;
+        left: 50%;
         top: 0;
-        margin-left: -35px;
         z-index: 2;
 
         img {
@@ -131,9 +157,9 @@ export default {
         transform-origin: 0 0;
         transform: rotate(-7deg);
         transition: transform 0.3s;
-        left: 60%;
+        left: 50%;
         top: 12.5px;
-        margin-left: -27.5px;
+        margin-left: 10px;
         z-index: 1;
 
         img {
@@ -147,8 +173,8 @@ export default {
         border: 50px solid #0e0e11;
         border-radius: 50%;
         position: absolute;
-        left: 0px;
-        right: 0px;
+        left: 0;
+        right: 0;
         top: 60px;
         margin: auto;
         animation: rotate 20s linear infinite;
@@ -188,7 +214,22 @@ export default {
 
   .lyrics-down-block {
     width: 80%;
-    margin: 0 auto;
+    margin: 20px auto;
+
+    .edit-comment {
+      width: 100%;
+      margin-top: 3%;
+      margin-bottom: 3%;
+    }
+  }
+
+  ul, li {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    margin: 10px 0;
   }
 }
 

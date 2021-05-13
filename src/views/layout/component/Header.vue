@@ -13,7 +13,7 @@
       <el-dropdown>
         <span class="el-dropdown-link">
           <i class="iconfont icon-yifu" :class="color" v-on:mouseover="color='theme_selected'"
-             v-on:mouseleave="color='theme'"></i>
+             v-on:mouseleave="color='theme'" style="font-size: 30px"></i>
         </span>
         <el-dropdown-menu slot="dropdown" class="theme_option">
           <el-dropdown-item>白色</el-dropdown-item>

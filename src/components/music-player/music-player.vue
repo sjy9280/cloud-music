@@ -4,7 +4,7 @@
     <div class="music-left-msg">
       <div class="play-cover" @mouseenter="isShade=true" @mouseleave="isShade=false" @click="togglePlayerPure">
         <el-avatar shape="square" :size="40" :src="currentMusic.pic"></el-avatar>
-        <i class="iconfont icon-zhankaiquanpingkuozhan cover-kuozhan" v-show="isShade"></i>
+        <i class="iconfont cover-kuozhan" v-show="isShade" :class="isLyrics?'icon-quxiaoquanping':'icon-quanping'"></i>
       </div>
       <div class="music-msg-right">
         <div class="music-name">

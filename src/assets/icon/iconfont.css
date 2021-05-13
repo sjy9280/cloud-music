@@ -1,18 +1,38 @@
 @font-face {
   font-family: "iconfont"; /* Project id 2529523 */
-  src: url('iconfont.eot?t=1620457785243'); /* IE9 */
-  src: url('iconfont.eot?t=1620457785243#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('iconfont.woff?t=1620457785243') format('woff'),
-       url('iconfont.ttf?t=1620457785243') format('truetype'),
-       url('iconfont.svg?t=1620457785243#iconfont') format('svg');
+  src: url('iconfont.eot?t=1620889717910'); /* IE9 */
+  src: url('iconfont.eot?t=1620889717910#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('iconfont.woff?t=1620889717910') format('woff'),
+       url('iconfont.ttf?t=1620889717910') format('truetype'),
+       url('iconfont.svg?t=1620889717910#iconfont') format('svg');
 }
 
 .iconfont {
   font-family: "iconfont" !important;
-  font-size: 30px;
+  font-size: 16px;
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-pinglun:before {
+  content: "\e614";
+}
+
+.icon-dianzan:before {
+  content: "\e615";
+}
+
+.icon-fenxiang:before {
+  content: "\e617";
+}
+
+.icon-quxiaoquanping:before {
+  content: "\e612";
+}
+
+.icon-quanping:before {
+  content: "\e613";
 }
 
 .icon-hot:before {
