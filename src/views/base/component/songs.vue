@@ -8,11 +8,12 @@
         type="index">
       </el-table-column>
       <el-table-column
-      width="100">
-        <template>
+        width="100">
+        <template slot-scope="scope">
           <span><i class="iconfont icon-zhuifanshu" style="font-size: 16px"></i></span>
           &nbsp;&nbsp;&nbsp;
-          <span><i class="el-icon-download" style="font-size: 16px"></i></span>
+          <span @click="handleDownload(scope.row)"><i class="el-icon-download"
+                                                      style="font-size: 16px;cursor: pointer"></i></span>
         </template>
       </el-table-column>
       <el-table-column
@@ -41,6 +42,8 @@
 import { getPlayListDetail } from '@/services/find-music'
 import { getCollectedSongs } from '@/services/song-list'
 import { formatDate } from '@/utils/date'
+import FileSaver from 'file-saver'
+import { getSong } from '@/services/player'
 
 export default {
   name: 'SongsLayout',
@@ -66,6 +69,15 @@ export default {
         if (data1.data.code === 200) {
           this.songsList = data1.data.songs
         }
+      }
+    },
+    async handleDownload (item) {
+      const { data } = await getSong({
+        id: item.id
+      })
+      console.log(item)
+      if (data.code === 200) {
+        FileSaver.saveAs(data.data[0].url, item.name)
       }
     }
   },

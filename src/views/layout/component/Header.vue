@@ -84,11 +84,21 @@ export default {
     }
   },
   created () {
+    this.initHeader()
   },
   methods: {
     selectMenu (item) {
       this.$router.push({ name: item.name })
       this.isActive = item.id
+    },
+    initHeader () {
+      if (this.selectBlock === 0) {
+        this.headerMenu = this.headerList[0]
+      } else if (this.selectBlock === 1) {
+        this.headerMenu = this.headerList[1]
+      } else {
+        this.headerMenu = []
+      }
     }
   },
   computed: {
@@ -98,13 +108,7 @@ export default {
   },
   watch: {
     selectBlock () {
-      if (this.selectBlock === 0) {
-        this.headerMenu = this.headerList[0]
-      } else if (this.selectBlock === 1) {
-        this.headerMenu = this.headerList[1]
-      } else {
-        this.headerMenu = []
-      }
+      this.initHeader()
     }
   }
 }

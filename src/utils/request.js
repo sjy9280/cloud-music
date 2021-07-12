@@ -2,7 +2,7 @@ import axios from 'axios'
 // 通过局部引入方式引入 Element 的 Message 组件功能
 import { Message } from 'element-ui'
 
-const baseURL="http://localhost:3000";
+const baseURL="http://139.196.142.213:3000";
 
 const request = axios.create({
   baseURL

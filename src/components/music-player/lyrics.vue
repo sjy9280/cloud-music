@@ -44,6 +44,7 @@
         </ul>
       </div>
     </div>
+    <i class="iconfont icon-quxiaoquanping icon-exit" @click="exitLyrics"></i>
   </div>
 </template>
 
@@ -96,6 +97,9 @@ export default {
         this.commentCount = data.total
         this.hotComments = data.hotComments
       }
+    },
+    exitLyrics () {
+      this.$parent.isLyrics = false
     }
   },
   computed: {
@@ -128,6 +132,15 @@ export default {
   z-index: 500;
   overflow: auto;
   background-color: #f9f9f9;
+
+  .icon-exit {
+    position: absolute;
+    right: 5%;
+    top: 0;
+    font-size: 25px;
+    color: gray;
+    cursor: pointer;
+  }
 
   .lyrics-up-block {
     width: 80%;

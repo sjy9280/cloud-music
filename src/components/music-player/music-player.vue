@@ -139,14 +139,6 @@ export default {
     },
     togglePlayerPure () {
       this.isLyrics = !this.isLyrics
-      if (this.isLyrics) {
-        this.oldSelectBlock = this.selectBlock
-        this.setSelectBlock({ index: 2 })
-      } else {
-        if (this.oldSelectBlock !== 2) {
-          this.setSelectBlock({ index: this.oldSelectBlock })
-        }
-      }
     },
     ...mapActions([
       'setCurrentIndex',
@@ -189,6 +181,16 @@ export default {
     currentTime (newTime) {
       this.musicProgress = Math.floor(this.currentTime * 1000 / this.currentMusic.duration * 100)
       this.setCurrentTime(this.currentTime)
+    },
+    isLyrics (old) {
+      if (this.isLyrics) {
+        this.oldSelectBlock = this.selectBlock
+        this.setSelectBlock({ index: 2 })
+      } else {
+        if (this.oldSelectBlock !== 2) {
+          this.setSelectBlock({ index: this.oldSelectBlock })
+        }
+      }
     }
   }
 }
@@ -217,9 +219,10 @@ export default {
         position: absolute;
         top: 50%;
         left: 50%;
-        margin-top: -10px;
-        margin-left: -10px;
-        font-size: 20px;
+        margin-top: -20px;
+        margin-left: -20px;
+        font-size: 40px;
+        color: white;
       }
     }
 
